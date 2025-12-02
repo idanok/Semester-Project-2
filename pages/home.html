@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BidHub | Home</title>
+
+    <link rel="stylesheet" href="../styles/output.css" />
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body
+    class="bg-[#F5ECE7] font-inter min-h-screen flex flex-col overflow-x-hidden"
+  >
+    <header id="siteHeader"></header>
+
+    <main class="flex-grow px-6 pb-20 mx-auto w-full max-w-[1400px]">
+      <div class="mx-auto w-full md:w-[90%] lg:w-[85%] mt-10">
+        <h2 class="text-xl md:text-2xl font-bold mb-8 text-center lg:text-left">
+          All Listings
+        </h2>
+
+        <div class="mb-6">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search listings..."
+            class="border rounded px-4 py-3 w-full text-lg shadow-sm"
+          />
+        </div>
+
+        <div class="mb-10 flex items-center gap-4">
+          <select
+            id="filterSelect"
+            class="border px-4 py-3 rounded text-base w-56 shadow-sm"
+          >
+            <option value="all">All Listings</option>
+            <option value="active">Active Listings</option>
+            <option value="ended">Ended Listings</option>
+          </select>
+
+          <button
+            id="createBtn"
+            class="bg-[#4B3028] text-white px-6 py-3 rounded shadow hover:bg-[#3b241d] transition"
+          >
+            + Create Listing
+          </button>
+        </div>
+
+        <div
+          id="listingsContainer"
+          class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full"
+        ></div>
+      </div>
+    </main>
+
+    <footer class="bg-[#4B3028] text-white text-center py-4 text-sm w-full">
+      © 2025 BidHub Auction House. All rights reserved.
+    </footer>
+
+    <script type="module" src="../src/listings/home.js"></script>
+  </body>
+</html>

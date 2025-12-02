@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Listing | BidHub</title>
+
+  <link rel="stylesheet" href="../styles/output.css" />
+  <link rel="icon" href="../assets/icons/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-[#F5ECE7] font-inter min-h-screen flex flex-col">
+
+  <!-- Header dynamically loaded -->
+  <header id="siteHeader"></header>
+
+  <main class="flex-grow flex justify-center items-start p-4 md:p-8">
+    <form id="createListingForm"
+          class="bg-white rounded-lg shadow p-6 w-full max-w-lg flex flex-col gap-4">
+
+      <h2 class="text-2xl font-bold text-[#4B3028] mb-4 text-center">
+        Create New Listing
+      </h2>
+
+      <label class="flex flex-col">
+        Title
+        <input type="text" name="title" required class="border rounded px-3 py-2 mt-1">
+      </label>
+
+      <label class="flex flex-col">
+        Description
+        <textarea name="description" rows="4"
+                  class="border rounded px-3 py-2 mt-1"></textarea>
+      </label>
+
+      <label class="flex flex-col">
+        Starting Price (credits)
+        <input type="number" name="price" min="0" required
+               class="border rounded px-3 py-2 mt-1">
+      </label>
+
+      <label class="flex flex-col">
+        Ends At
+        <input type="datetime-local" name="endsAt" required
+               class="border rounded px-3 py-2 mt-1">
+      </label>
+
+      <label class="flex flex-col">
+        Image URL
+        <input type="url" name="mediaUrl"
+               placeholder="https://example.com/image.jpg"
+               class="border rounded px-3 py-2 mt-1">
+      </label>
+
+      <button type="submit"
+              class="bg-[#4B3028] text-white py-2 rounded hover:bg-[#36221c]">
+        Create Listing
+      </button>
+
+      <p id="formMessage" class="text-center text-sm mt-2"></p>
+    </form>
+  </main>
+
+  <footer class="bg-[#4B3028] text-white text-center py-4 text-sm w-full">
+    © 2025 BidHub Auction House. All rights reserved.
+  </footer>
+
+  <script type="module" src="../src/listings/create.js"></script>
+</body>
+</html>

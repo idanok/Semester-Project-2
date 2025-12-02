@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Listing — BidHub</title>
+  <link rel="stylesheet" href="../styles/output.css">
+  <link rel="icon" href="../icons/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#F5ECE7] font-inter min-h-screen flex flex-col">
+
+  <header id="siteHeader"></header>
+
+
+  <main class="flex-grow w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] mx-auto p-6 space-y-6">
+
+    <h2 class="text-2xl font-semibold text-[#4B3028] mb-4">Update Listing</h2>
+
+    <form id="updateForm" class="bg-white rounded-lg shadow-md p-6 space-y-4 w-full">
+
+      <div>
+        <label for="title" class="block text-gray-700 mb-1">Title:</label>
+        <input type="text" id="title" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4B3028]" required>
+      </div>
+
+      <div>
+        <label for="description" class="block text-gray-700 mb-1">Description:</label>
+        <textarea id="description" rows="4" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4B3028]" required></textarea>
+      </div>
+
+      <div>
+        <label for="startingPrice" class="block text-gray-700 mb-1">Starting Price:</label>
+        <input type="number" id="startingPrice" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4B3028]" required>
+      </div>
+
+      <div>
+        <label for="media" class="block text-gray-700 mb-1">Image URL:</label>
+        <input type="url" id="media" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4B3028]">
+      </div>
+
+      <div>
+        <label for="endsAt" class="block text-gray-700 mb-1">Ends At:</label>
+        <input type="datetime-local" id="endsAt" class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#4B3028]">
+      </div>
+
+      <div class="flex gap-4">
+        <button type="submit" class="bg-[#4B3028] text-white px-4 py-2 rounded hover:bg-[#3c2721] transition">Update</button>
+        <button type="button" id="deleteBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Delete</button>
+      </div>
+
+      <p id="msg" class="text-sm text-green-600 mt-2"></p>
+      <p id="error" class="text-sm text-red-600 mt-2"></p>
+    </form>
+
+  </main>
+
+  <footer class="bg-[#4B3028] text-white py-4 text-center text-sm">
+    © 2025 BidHub Auction House. All rights reserved.
+  </footer>
+
+  <script type="module" src="../src/listings/edit.js"></script>
+</body>
+</html>
