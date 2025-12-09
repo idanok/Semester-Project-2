@@ -96,19 +96,21 @@ function renderListing(listing) {
 
   // ---------------- BID HISTORY ---------------- //
   const bidHistory = listing.bids?.length
-    ? listing.bids
-        .sort((a, b) => b.amount - a.amount)
-        .map(
-          (b) => `
-            <div class="border p-2 rounded bg-gray-50">
-              <p><strong>${b.bidder}</strong>: ${b.amount} credits</p>
-              <p class="text-xs text-gray-500">${new Date(
-                b.created
-              ).toLocaleString()}</p>
-            </div>`
-        )
-        .join("")
-    : "<p>No bids yet.</p>";
+  ? listing.bids
+      .sort((a, b) => b.amount - a.amount)
+      .map(
+        (b) => `
+          <div class="border p-2 rounded bg-gray-50">
+            <p><strong>${b.bidder?.name || "Unknown"}</strong>: ${b.amount} credits</p>
+            <p class="text-xs text-gray-500">
+              ${new Date(b.created).toLocaleString()}
+            </p>
+          </div>`
+      )
+      .join("")
+  : "<p>No bids yet.</p>";
+
+
 
   // ---------------- OUTPUT HTML ---------------- //
   listingContainer.innerHTML = `

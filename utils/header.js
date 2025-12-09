@@ -33,14 +33,15 @@ headerContainer.innerHTML = `
         <p class="text-sm opacity-90 -mt-1">Where bids meets opportunities</p>
     </div>
 
-    <div class="flex items-center gap-6">
+        <div class="flex items-center gap-6">
 
         <div id="userCredit"
             class="hidden bg-[#B87A62] text-white text-sm font-semibold px-4 py-2 rounded-xl shadow">
         Credits: --
         </div>
 
-        <div id="userMenuWrapper" class="relative hidden">
+        <!-- userMenuWrapper: added overflow-visible so the arrow won't be clipped on small screens -->
+        <div id="userMenuWrapper" class="relative hidden overflow-visible">
         <div id="userMenuButton" class="flex items-center gap-3 cursor-pointer select-none">
 
             <img id="headerAvatar"
@@ -48,12 +49,14 @@ headerContainer.innerHTML = `
 
             <span id="navUsername" class="text-lg font-medium"></span>
 
-            <svg id="dropdownArrow" class="w-4 h-4 transition-transform"
+            <!-- svg: added flex-shrink-0 ml-1 block to ensure it's visible on small screens -->
+            <svg id="dropdownArrow" class="w-4 h-4 flex-shrink-0 ml-1 block transition-transform"
             fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M19 9l-7 7-7-7" />
             </svg>
         </div>
+
 
         <div id="userDropdown"
             class="hidden absolute right-0 mt-3 bg-white text-black rounded-lg shadow-lg w-44 py-2 z-50">
@@ -122,7 +125,9 @@ profileDropdown.addEventListener("click", () => {
 
 logoutDropdown.addEventListener("click", () => {
     logout();
+    window.location.href = "../pages/index.html";
 });
+
 
   // ----------------------------------
   // Dropdown logic

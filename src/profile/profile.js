@@ -176,7 +176,7 @@ async function fetchUserBids() {
     const all = await apiGet("/auction/listings?_seller=true&_bids=true", token, apiKey);
 
     const myBids = all.filter((listing) =>
-      listing.bids?.some((b) => b.bidder === username)
+      listing.bids?.some((b) => b.bidder?.name === username)
     );
 
     const validated = await Promise.all(
@@ -191,6 +191,7 @@ async function fetchUserBids() {
     console.error("FETCH USER BIDS ERROR:", err);
   }
 }
+
 
 /* ------------------------------------------
 DELETE LISTING
