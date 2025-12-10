@@ -68,7 +68,7 @@ Users see:
 - Update avatar, banner, and bio
 View:
 - My Listings
-- My Bids (wins)
+- My Bids
 - Edit or delete your listings
 - View button added for easy navigation
 - Credits always visible when logged in
@@ -81,29 +81,6 @@ Filter by:
 - Ended listings
 - All listings
 Click any listing card to view details
-
-# 📂 Project Structure
-root/
-├── assets/
-│   └── css/
-├── auth/
-│   ├── login.js
-│   └── register.js
-├── account/
-│   └── profile.js
-├── listings/
-│   ├── create.js
-│   ├── edit.js
-│   └── view.js
-├── html/
-│   ├── login.html
-│   ├── register.html
-│   ├── home.html
-│   ├── profile.html
-│   ├── create.html
-│   ├── edit.html
-│   └── view.html
-└── README.md
 
 # 🚀 Installation & Setup
 To run this project locally:
@@ -121,35 +98,6 @@ To use the Noroff Auction API you need:
 - Your accessToken (stored on login)
 - A Noroff API Key stored in localStorage
 - The project automatically handles this once the user logs in.
-
-
-# 🧠 Key Challenges & Solutions
- 1. Authentication & API Keys
-Struggled to generate and validate API keys and tokens.
-Solution: Built helper functions to check token + username + API key securely in localStorage.
-
-2. Logged-in State Detection
-Pages were showing logged-in UI even when not authenticated.
-Solution: Added a global isLoggedIn() and redirect logic for protected pages.
-
-3. “Place Bid” Not Showing Correctly
-The wrong button displayed depending on login state.
-Solution: Added conditional rendering:
-- Place Bid
-- Log in to place bid
-- You cannot bid on your own listing
-
-4. Credits Not Updating
-Credits didn’t update after bidding.
-Solution: Re-fetched the user profile after placing a bid.
-
-5. Dropdown Menu Not Closing Smoothly
-Dropdown stayed open or closed unexpectedly.
-Solution: Added click-outside detection + improved toggle logic.
-
-6. Matching Figma Design in Code
-Spacing and sizing didn’t match my wireframes.
-Solution: Inspected elements in the browser and adjusted Tailwind classes until it matched.
 
 # 📚 Reflection Summary
 This project strengthened my skills in:
