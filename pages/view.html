@@ -14,10 +14,15 @@
     <header id="siteHeader"></header>
 
     <main class="flex-grow p-6 w-full flex justify-center">
+
+      <h1 class="sr-only">Auction Listing Details</h1>
+
       <div
         id="listingContainer"
         class="bg-white rounded-lg shadow-md p-6 w-full sm:w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%]"
-      ></div>
+      >
+        <h2 id="listingTitle" class="sr-only">Loading listing…</h2>
+      </div>
     </main>
 
     <footer class="bg-[#4B3028] text-white text-center py-4 text-sm w-full">
@@ -27,4 +32,3 @@
     <script type="module" src="../src/listings/view.js"></script>
   </body>
 </html>
-

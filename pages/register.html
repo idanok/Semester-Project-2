@@ -48,9 +48,11 @@
       </section>
 
       <section class="w-full max-w-sm">
-        <h2 class="sr-only">Registration Form</h2>
 
-        <form id="registerForm" class="flex flex-col space-y-5">
+        <h2 id="registerFormTitle" class="sr-only">User Registration Form</h2>
+
+        <form id="registerForm" aria-labelledby="registerFormTitle" class="flex flex-col space-y-5">
+
           <div>
             <label for="name" class="block text-[#4B3028] font-medium mb-2">Username</label>
             <input
@@ -101,7 +103,7 @@
           <div class="flex-grow border-t border-[#4B3028]/30"></div>
           <span class="mx-3 text-[#4B3028] font-semibold text-sm">
             Already have an account?
-          </span>          
+          </span>
           <div class="flex-grow border-t border-[#4B3028]/30"></div>
         </div>
 
@@ -118,4 +120,3 @@
     <script type="module" src="../src/auth/register.js"></script>
   </body>
 </html>
-
