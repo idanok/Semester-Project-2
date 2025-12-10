@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register — BidHub Auction House</title>
 
-    <meta
-      name="description"
-      content="Create a new BidHub account to place bids, create listings, and participate in auctions."
-    />
+    <meta name="description" content="Create a new BidHub account to place bids, create listings, and participate in auctions.">
 
-    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="../styles/output.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
       input,
       input:focus,
@@ -29,25 +24,32 @@
         -webkit-text-fill-color: #4b3028 !important;
         caret-color: #4b3028 !important;
       }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
     </style>
   </head>
 
   <body class="bg-[#F5ECE7] min-h-screen flex flex-col font-inter">
-    <main
-      class="flex-grow flex flex-col lg:flex-row items-center justify-center py-12 px-6 lg:px-20 gap-24"
-    >
+    <main class="flex-grow flex flex-col lg:flex-row items-center justify-center py-12 px-6 lg:px-20 gap-24">
+
       <section class="text-center lg:text-left max-w-md">
-        <h1 class="text-[40px] font-bold mb-4 text-[#4B3028]">
-          Register a new account
-        </h1>
-        <p class="text-lg text-[#4B3028] opacity-90">
-          Join the BidHub community!
-        </p>
+        <h1 class="text-[40px] font-bold mb-4 text-[#4B3028]">Register a new account</h1>
+        <p class="text-lg text-[#4B3028] opacity-90">Join the BidHub community!</p>
       </section>
 
       <section class="w-full max-w-sm">
         <h2 class="sr-only">Registration Form</h2>
-      
+
         <form id="registerForm" class="flex flex-col space-y-5">
           <div>
             <label for="name" class="block text-[#4B3028] font-medium mb-2">Username</label>
@@ -58,9 +60,9 @@
               placeholder="Choose a username"
               required
               class="w-full border border-[#4B3028] rounded-lg px-4 py-3 text-[#4B3028] focus:outline-none focus:ring-2 focus:ring-[#4B3028]"
-            />
+            >
           </div>
-      
+
           <div>
             <label for="email" class="block text-[#4B3028] font-medium mb-2">Email</label>
             <input
@@ -70,9 +72,9 @@
               placeholder="Your stud.noroff.no email"
               required
               class="w-full border border-[#4B3028] rounded-lg px-4 py-3 text-[#4B3028] focus:outline-none focus:ring-2 focus:ring-[#4B3028]"
-            />
+            >
           </div>
-      
+
           <div>
             <label for="password" class="block text-[#4B3028] font-medium mb-2">Password</label>
             <input
@@ -82,9 +84,9 @@
               placeholder="Create a password"
               required
               class="w-full border border-[#4B3028] rounded-lg px-4 py-3 text-[#4B3028] focus:outline-none focus:ring-2 focus:ring-[#4B3028]"
-            />
+            >
           </div>
-      
+
           <button
             type="submit"
             class="w-full bg-[#4B3028] hover:bg-[#3c2721] text-white font-semibold py-3 rounded-lg transition shadow-md"
@@ -92,19 +94,15 @@
             Register
           </button>
         </form>
-      
-        <p
-          id="errorMessage"
-          class="text-red-600 text-sm mt-3 text-center"
-          aria-live="polite"
-        ></p>
-      
+
+        <p id="errorMessage" class="text-red-600 text-sm mt-3 text-center" aria-live="polite"></p>
+
         <div class="flex items-center my-6">
           <div class="flex-grow border-t border-[#4B3028]/30"></div>
           <span class="mx-3 text-[#4B3028]/70 text-sm">Already have an account?</span>
           <div class="flex-grow border-t border-[#4B3028]/30"></div>
         </div>
-      
+
         <button
           onclick="window.location.href='login.html'"
           class="w-full border-2 border-[#4B3028] text-[#4B3028] font-semibold py-3 rounded-lg hover:bg-[#4B3028] hover:text-white transition"
@@ -112,9 +110,10 @@
           Log In
         </button>
       </section>
-      
+
     </main>
 
     <script type="module" src="../src/auth/register.js"></script>
   </body>
 </html>
+

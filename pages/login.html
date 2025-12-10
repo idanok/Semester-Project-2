@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In — BidHub Auction House</title>
 
-    <meta
-      name="description"
-      content="Log in to your BidHub account to place bids, create listings, and manage your profile."
-    />
+    <meta name="description" content="Log in to your BidHub account to place bids, create listings, and manage your profile.">
 
-    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="../styles/output.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="../assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
       input:-webkit-autofill {
@@ -27,19 +21,16 @@
   </head>
 
   <body class="bg-[#F5ECE7] min-h-screen flex flex-col font-inter">
-    <main
-      class="flex-grow flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 py-12 gap-24"
-    >
+    <main class="flex-grow flex flex-col lg:flex-row items-center justify-center px-6 lg:px-20 py-12 gap-24">
+      
       <section class="text-center lg:text-left max-w-md">
-        <h1 class="text-[40px] font-bold mb-4 text-[#4B3028]">
-          Log in to your account
-        </h1>
+        <h1 class="text-[40px] font-bold mb-4 text-[#4B3028]">Log in to your account</h1>
         <p class="text-lg text-[#4B3028] opacity-90">Welcome back to BidHub!</p>
       </section>
 
       <section class="w-full max-w-sm">
-        <h2 class="sr-only">Login Form</h2>
-        
+        <h2 class="hidden">Login Form</h2>
+
         <form id="loginForm" class="flex flex-col space-y-5">
           <div>
             <label for="email" class="block text-[#4B3028] font-medium mb-2">Email</label>
@@ -50,9 +41,9 @@
               placeholder="Your stud.noroff.no email"
               required
               class="w-full border border-[#4B3028] text-[#4B3028] rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4B3028]"
-            />
+            >
           </div>
-      
+
           <div>
             <label for="password" class="block text-[#4B3028] font-medium mb-2">Password</label>
             <input
@@ -62,13 +53,13 @@
               placeholder="Password"
               required
               class="w-full border border-[#4B3028] rounded-lg px-4 py-3 text-[#4B3028] focus:outline-none focus:ring-2 focus:ring-[#4B3028]"
-            />
+            >
           </div>
-      
+
           <div class="text-right">
             <a href="#" class="text-sm text-[#4B3028] hover:underline font-medium">Forgot password?</a>
           </div>
-      
+
           <button
             type="submit"
             class="w-full bg-[#4B3028] hover:bg-[#3c2721] text-white font-semibold py-3 rounded-lg transition shadow-md"
@@ -76,15 +67,15 @@
             Log In
           </button>
         </form>
-      
+
         <p id="errorMessage" class="text-red-600 text-sm mt-3 text-center" aria-live="polite"></p>
-      
+
         <div class="flex items-center my-6">
           <div class="flex-grow border-t border-[#4B3028]/30"></div>
           <span class="mx-3 text-[#4B3028]/70 text-sm">Or register a new user</span>
           <div class="flex-grow border-t border-[#4B3028]/30"></div>
         </div>
-      
+
         <button
           onclick="window.location.href='register.html'"
           class="w-full border border-[#4B3028] text-[#4B3028] font-semibold py-3 rounded-lg hover:bg-[#4B3028] hover:text-white transition"
@@ -92,9 +83,10 @@
           Register
         </button>
       </section>
-      
+
     </main>
 
     <script type="module" src="../src/auth/login.js"></script>
   </body>
 </html>
+
