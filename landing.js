@@ -7,27 +7,10 @@ const filterSelect = document.getElementById("filterSelect");
 
 let listings = [];
 
-const MAX_LISTINGS = 12;
-
-/**
- * Redirect to login page.
- *
- * @function
- */
-loginBtn.onclick = () => (window.location.href = "../pages/login.html");
-
-/**
- * Redirect to register page.
- *
- * @function
- */
-registerBtn.onclick = () => (window.location.href = "../pages/register.html");
+/* Removed MAX_LISTINGS */
 
 /**
  * Optimize image by converting to 300px width thumbnail.
- *
- * @param {string} url
- * @returns {string}
  */
 function optimizeImage(url) {
   if (!url) return "../assets/images/fallback.webp";
@@ -35,13 +18,7 @@ function optimizeImage(url) {
 }
 
 /**
- * Validate an image URL.  
- * If optimized version fails, fallback to original or fallback.
- *
- * @async
- * @function validateImage
- * @param {string} url - Image URL to validate
- * @returns {Promise<string>}
+ * Validate an image URL.
  */
 function validateImage(url) {
   return new Promise((resolve) => {
@@ -58,7 +35,7 @@ function validateImage(url) {
 }
 
 /**
- * Fetch limited listings & optimize images.
+ * Fetch ALL listings with NO LIMIT.
  */
 async function fetchListings() {
   try {
@@ -70,13 +47,14 @@ async function fetchListings() {
 
     const data = await res.json();
 
-    const limitedData = data.data.slice(0, MAX_LISTINGS);
+    // DO NOT SLICE — show everything
+    const fullData = data.data;
 
     listings = await Promise.all(
-      limitedData.map(async (listing) => ({
+      fullData.map(async (listing) => ({
         ...listing,
         mediaUrl: await validateImage(listing.media?.[0]?.url),
-        altText: listing.media?.[0]?.alt || listing.title || "Auction listing image"
+        altText: listing.media?.[0]?.alt || listing.title || "Auction listing image",
       }))
     );
 
@@ -91,9 +69,7 @@ async function fetchListings() {
 }
 
 /**
- * Preload the first LCP image.
- *
- * @param {string} url
+ * Preload LCP image.
  */
 function preloadFirstImage(url) {
   if (!url) return;
@@ -106,7 +82,7 @@ function preloadFirstImage(url) {
 }
 
 /**
- * Render listing cards into the page.
+ * Render listing cards.
  */
 function renderListings(listingsToRender) {
   listingsContainer.innerHTML = listingsToRender
@@ -147,7 +123,7 @@ function renderListings(listingsToRender) {
 }
 
 /**
- * Add click handlers so each listing card opens the view page.
+ * Add click handlers for cards.
  */
 function attachCardClickEvents() {
   document.querySelectorAll(".listing-card").forEach((card) => {
@@ -159,7 +135,7 @@ function attachCardClickEvents() {
 }
 
 /**
- * Apply both search and filter based on input text and filter dropdown.
+ * Search + Filter
  */
 function applySearchAndFilter() {
   const term = searchInput.value.toLowerCase();
@@ -185,3 +161,4 @@ searchInput.addEventListener("input", applySearchAndFilter);
 filterSelect.addEventListener("change", applySearchAndFilter);
 
 fetchListings();
+

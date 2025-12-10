@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BidHub | Online Auctions, Bidding & Listings Marketplace</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="description" content="Browse active auctions, place bids, and explore listings on BidHub — a modern online auction marketplace with real-time bidding.">
+    <title>BidHub | Online Auctions & Listings Marketplace</title>
+    <meta name="description" content="Browse active auctions, place bids, and explore listings on BidHub — a modern online auction marketplace." />
+    <link rel="canonical" href="https://bidhub1.netlify.app/" />
 
-    <link rel="canonical" href="https://bidhub1.netlify.app/">
+    <link rel="preload" href="./assets/images/fallback.webp" as="image" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="./styles/output.css">
+    <link rel="stylesheet" href="./styles/output.css" />
+    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
 
-    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="BidHub | Online Auctions" />
+    <meta property="og:description" content="Explore auctions, place bids, and browse listings on BidHub." />
+    <meta property="og:url" content="https://bidhub1.netlify.app/" />
+    <meta property="og:type" content="website" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <meta property="og:title" content="BidHub | Online Auctions">
-    <meta property="og:description" content="Join BidHub to browse listings, place bids, and participate in online auctions.">
-    <meta property="og:url" content="https://bidhub1.netlify.app/">
-    <meta property="og:type" content="website">
-
-    <meta name="twitter:title" content="BidHub | Online Auctions">
-    <meta name="twitter:description" content="Explore live auctions, bids, and listings on BidHub.">
-
-    <link rel="alternate" hreflang="en" href="https://bidhub1.netlify.app/">
+    <meta name="twitter:title" content="BidHub | Online Auctions" />
+    <meta name="twitter:description" content="Live auctions, listings, and bidding features on BidHub." />
 
     <script type="application/ld+json">
     {
@@ -34,18 +31,7 @@
       "@type": "WebSite",
       "name": "BidHub",
       "url": "https://bidhub1.netlify.app/",
-      "description": "An online auction marketplace featuring listings, bidding, and seller profiles."
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "BidHub Auction House",
-      "url": "https://bidhub1.netlify.app/",
-      "sameAs": [],
-      "logo": "https://bidhub1.netlify.app/assets/icons/favicon.ico"
+      "description": "A modern online auction platform for browsing listings and placing bids."
     }
     </script>
   </head>
@@ -57,54 +43,32 @@
         <p class="text-sm md:text-base -mt-1 opacity-90">Where bids meet opportunities</p>
       </div>
 
-      <nav class="flex items-center gap-3">
-        <a href="./index.html" class="hidden md:inline-block underline-offset-2 hover:underline">Home</a>
+      <div class="flex items-center gap-3">
         <button id="loginBtn" class="border px-3 py-1 rounded hover:bg-white hover:text-[#4B3028]">Login</button>
         <button id="registerBtn" class="border px-3 py-1 rounded hover:bg-white hover:text-[#4B3028]">Register</button>
-      </nav>
+      </div>
     </header>
 
-    <main class="flex-grow p-4 md:p-6 lg:p-8 max-w-screen-xl mx-auto w-full space-y-10">
-      <section class="max-w-3xl mx-auto text-center lg:text-left space-y-4">
-        <h2 class="text-2xl md:text-3xl font-bold">Discover Live Auctions and Listings</h2>
-        <p class="text-base md:text-lg text-[#4B3028]">
-          BidHub is a simple auction platform where you can browse live listings, place bids, and follow the activity of other sellers and bidders.
-          Use the search and filters below to quickly find the items you are most interested in, whether you want to win a specific auction or just explore what is available.
-        </p>
-        <p class="text-sm md:text-base text-[#4B3028] opacity-90">
-          Log in or register to create your own listings, track the status of your bids, and manage your profile. Listings show the current highest bid, the seller, and when the auction ends so you can decide when and how much to bid.
-        </p>
-      </section>
+    <main class="flex-grow p-4 md:p-6 lg:p-8 max-w-screen-xl mx-auto w-full">
+      <h2 class="text-xl md:text-2xl font-bold mb-6 text-center lg:text-left">All Listings</h2>
 
-      <section aria-labelledby="listings-heading" class="space-y-4">
-        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-          <div>
-            <h3 id="listings-heading" class="text-xl md:text-2xl font-semibold">All Auction Listings</h3>
-            <p class="text-sm md:text-base text-[#4B3028] opacity-90">
-              Filter by status or search by title and description to find the auctions you care about.
-            </p>
-          </div>
-        </div>
+      <div class="w-full mb-6">
+        <input id="searchInput" type="text" placeholder="Search listings..." class="border rounded px-3 py-2 w-full" />
+      </div>
 
-        <div class="w-full mb-4 mt-2">
-          <input id="searchInput" type="text" placeholder="Search listings by title or description..." class="border rounded px-3 py-2 w-full">
-        </div>
+      <div class="w-full mb-6">
+        <select id="filterSelect" class="border rounded px-3 py-2 w-full">
+          <option value="all">All Listings</option>
+          <option value="active">Active Listings</option>
+          <option value="ended">Ended Listings</option>
+        </select>
+      </div>
 
-        <div class="w-full mb-6">
-          <select id="filterSelect" class="border rounded px-3 py-2 w-full md:w-64">
-            <option value="all">All Listings</option>
-            <option value="active">Active Listings</option>
-            <option value="ended">Ended Listings</option>
-          </select>
-        </div>
-
-        <div id="listingsContainer" class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 p-4"></div>
-      </section>
+      <div id="listingsContainer" class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 p-4"></div>
     </main>
 
-    <footer class="bg-[#4B3028] text-white text-center py-4 text-sm w-full space-y-1">
-      <p>© 2025 BidHub Auction House. All rights reserved.</p>
-      <p>Online auction platform for browsing listings, placing bids, and managing your profile.</p>
+    <footer class="bg-[#4B3028] text-white text-center py-4 text-sm w-full">
+      © 2025 BidHub Auction House. All rights reserved.
     </footer>
 
     <script type="module" src="landing.js"></script>
