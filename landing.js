@@ -7,70 +7,35 @@ const filterSelect = document.getElementById("filterSelect");
 
 let listings = [];
 
-/* Removed MAX_LISTINGS */
+/* Redirect buttons */
+loginBtn.onclick = () => (window.location.href = "../pages/login.html");
+registerBtn.onclick = () => (window.location.href = "../pages/register.html");
 
-/**
- * Optimize image by converting to 300px width thumbnail.
- */
+/* Convert large Noroff images → optimized 300px thumbnails */
 function optimizeImage(url) {
   if (!url) return "../assets/images/fallback.webp";
-  return url.replace("https://cdn.noroff.dev/images", "https://cdn.noroff.dev/300/images");
+  return url.replace(
+    "https://cdn.noroff.dev/images",
+    "https://cdn.noroff.dev/300/images"
+  );
 }
 
-/**
- * Validate an image URL.
- */
+/* Validate optimized image */
 function validateImage(url) {
   return new Promise((resolve) => {
     if (!url) return resolve("../assets/images/fallback.webp");
 
-    const thumb = optimizeImage(url);
-
+    const optimized = optimizeImage(url);
     const img = new Image();
-    img.onload = () => resolve(thumb);
+
+    img.onload = () => resolve(optimized);
     img.onerror = () => resolve("../assets/images/fallback.webp");
 
-    img.src = thumb;
+    img.src = optimized;
   });
 }
 
-/**
- * Fetch ALL listings with NO LIMIT.
- */
-async function fetchListings() {
-  try {
-    const res = await fetch(
-      "https://v2.api.noroff.dev/auction/listings?_seller=true&_bids=true"
-    );
-
-    if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
-
-    const data = await res.json();
-
-    // DO NOT SLICE — show everything
-    const fullData = data.data;
-
-    listings = await Promise.all(
-      fullData.map(async (listing) => ({
-        ...listing,
-        mediaUrl: await validateImage(listing.media?.[0]?.url),
-        altText: listing.media?.[0]?.alt || listing.title || "Auction listing image",
-      }))
-    );
-
-    preloadFirstImage(listings[0]?.mediaUrl);
-    renderListings(listings);
-
-  } catch (err) {
-    console.error("Failed to load listings", err);
-    listingsContainer.innerHTML =
-      "<p class='text-red-600 text-center'>Failed to load listings.</p>";
-  }
-}
-
-/**
- * Preload LCP image.
- */
+/* Preload first image (improves LCP massively) */
 function preloadFirstImage(url) {
   if (!url) return;
   const link = document.createElement("link");
@@ -81,9 +46,39 @@ function preloadFirstImage(url) {
   document.head.appendChild(link);
 }
 
-/**
- * Render listing cards.
- */
+/* Fetch ALL listings (you keep all of them!) */
+async function fetchListings() {
+  try {
+    const res = await fetch(
+      "https://v2.api.noroff.dev/auction/listings?_seller=true&_bids=true"
+    );
+
+    const data = await res.json();
+
+    listings = await Promise.all(
+      data.data.map(async (listing) => ({
+        ...listing,
+        mediaUrl: await validateImage(listing.media?.[0]?.url),
+        altText:
+          listing.media?.[0]?.alt ||
+          listing.title ||
+          "Auction listing image"
+      }))
+    );
+
+    /* Preload the first listing image for better LCP */
+    preloadFirstImage(listings[0]?.mediaUrl);
+
+    renderListings(listings);
+
+  } catch (err) {
+    console.error("Failed to load listings", err);
+    listingsContainer.innerHTML =
+      "<p class='text-red-600 text-center'>Failed to load listings.</p>";
+  }
+}
+
+/* Render all listing cards */
 function renderListings(listingsToRender) {
   listingsContainer.innerHTML = listingsToRender
     .map((listing, index) => {
@@ -122,9 +117,7 @@ function renderListings(listingsToRender) {
   attachCardClickEvents();
 }
 
-/**
- * Add click handlers for cards.
- */
+/* Click event for each card */
 function attachCardClickEvents() {
   document.querySelectorAll(".listing-card").forEach((card) => {
     const id = card.dataset.id;
@@ -134,16 +127,14 @@ function attachCardClickEvents() {
   });
 }
 
-/**
- * Search + Filter
- */
+/* Search + Filter */
 function applySearchAndFilter() {
   const term = searchInput.value.toLowerCase();
   const filter = filterSelect.value;
   const now = new Date();
 
   const filtered = listings.filter((listing) => {
-    const matchesSearch =
+    const matchesText =
       listing.title.toLowerCase().includes(term) ||
       listing.description?.toLowerCase().includes(term);
 
@@ -151,7 +142,7 @@ function applySearchAndFilter() {
     if (filter === "active") matchesFilter = new Date(listing.endsAt) > now;
     if (filter === "ended") matchesFilter = new Date(listing.endsAt) <= now;
 
-    return matchesSearch && matchesFilter;
+    return matchesText && matchesFilter;
   });
 
   renderListings(filtered);
@@ -160,5 +151,5 @@ function applySearchAndFilter() {
 searchInput.addEventListener("input", applySearchAndFilter);
 filterSelect.addEventListener("change", applySearchAndFilter);
 
+/* LOAD EVERYTHING */
 fetchListings();
-
