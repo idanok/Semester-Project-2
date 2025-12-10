@@ -125,7 +125,7 @@ profileDropdown.addEventListener("click", () => {
 
 logoutDropdown.addEventListener("click", () => {
     logout();
-    window.location.href = "../pages/index.html";
+    window.location.href = "../index.html";
 });
 
 
