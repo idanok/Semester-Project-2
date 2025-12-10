@@ -10,35 +10,12 @@
 
     <link rel="preload" href="./assets/images/fallback.webp" as="image" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet" 
-      fetchpriority="low">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-
-    <link rel="preload" href="./styles/output.css" as="style">
-    <link rel="stylesheet" href="./styles/output.css">
-
+    <link rel="stylesheet" href="./styles/output.css" />
     <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
-
-    <meta property="og:title" content="BidHub | Online Auctions" />
-    <meta property="og:description" content="Explore auctions, place bids, and browse listings on BidHub." />
-    <meta property="og:url" content="https://bidhub1.netlify.app/" />
-    <meta property="og:type" content="website" />
-
-    <meta name="twitter:title" content="BidHub | Online Auctions" />
-    <meta name="twitter:description" content="Live auctions, listings, and bidding features on BidHub." />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "BidHub",
-      "url": "https://bidhub1.netlify.app/",
-      "description": "A modern online auction platform for browsing listings and placing bids."
-    }
-    </script>
   </head>
 
   <body class="bg-[#F5ECE7] font-inter min-h-screen flex flex-col overflow-x-hidden">
@@ -54,14 +31,6 @@
       </div>
     </header>
 
-    <img id="lcp-img"
-     fetchpriority="high"
-     decoding="async"
-     class="w-full h-64 object-cover mb-4 rounded"
-     src="./assets/images/fallback.webp"
-     alt="Loading listing preview">
-
-
     <main class="flex-grow p-4 md:p-6 lg:p-8 max-w-screen-xl mx-auto w-full">
       <h2 class="text-xl md:text-2xl font-bold mb-6 text-center lg:text-left">All Listings</h2>
 
@@ -70,13 +39,13 @@
       </div>
 
       <div class="w-full mb-6">
+        <label for="filterSelect" class="sr-only">Filter Listings</label>
         <select id="filterSelect" class="border rounded px-3 py-2 w-full">
           <option value="all">All Listings</option>
           <option value="active">Active Listings</option>
           <option value="ended">Ended Listings</option>
         </select>
       </div>
-      <img src="URL" fetchpriority="high" loading="eager">
 
       <div id="listingsContainer" class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 p-4"></div>
     </main>
@@ -85,7 +54,7 @@
       © 2025 BidHub Auction House. All rights reserved.
     </footer>
 
-    <script type="module" src="landing.js" defer></script>
-
+    <script type="module" src="landing.js"></script>
   </body>
 </html>
+
