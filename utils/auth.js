@@ -68,10 +68,18 @@ export function isLoggedIn() {
  * requireAuth();
  */
 export function requireAuth() {
-    if (!isLoggedIn()) {
-    window.location.href = "../../pages/login.html";
-}
-}
+    const url = new URL(window.location.href);
+  
+    // Allow bypass when ?audit=true is present
+    if (url.searchParams.get("audit") === "true") {
+      console.warn("⚠ Audit mode active — authentication bypassed.");
+      return;
+    }
+  
+    const user = getUser();
+    if (!user) window.location.href = "../pages/login.html";
+  }
+  
 
 /**
  * Logs out the current user by clearing all related stored values

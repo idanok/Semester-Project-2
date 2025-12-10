@@ -14,6 +14,8 @@
   <header id="siteHeader"></header>
 
   <main class="flex-grow flex justify-center items-start p-4 md:p-8">
+    <h1 class="sr-only">Create a New Auction Listing on BidHub</h1>
+
     <form
       id="createListingForm"
       class="bg-white rounded-lg shadow p-6 w-full max-w-lg flex flex-col gap-4"
@@ -22,30 +24,55 @@
         Create New Listing
       </h2>
 
-      <label class="flex flex-col">
+      <label for="title" class="flex flex-col">
         Title
-        <input type="text" name="title" required class="border rounded px-3 py-2 mt-1">
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          class="border rounded px-3 py-2 mt-1"
+        >
       </label>
 
-      <label class="flex flex-col">
+      <label for="description" class="flex flex-col">
         Description
-        <textarea name="description" rows="4" class="border rounded px-3 py-2 mt-1"></textarea>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          class="border rounded px-3 py-2 mt-1"
+        ></textarea>
       </label>
 
-      <label class="flex flex-col">
+      <label for="price" class="flex flex-col">
         Starting Price (credits)
-        <input type="number" name="price" min="0" required class="border rounded px-3 py-2 mt-1">
+        <input
+          type="number"
+          id="price"
+          name="price"
+          min="0"
+          required
+          class="border rounded px-3 py-2 mt-1"
+        >
       </label>
 
-      <label class="flex flex-col">
+      <label for="endsAt" class="flex flex-col">
         Ends At
-        <input type="datetime-local" name="endsAt" required class="border rounded px-3 py-2 mt-1">
+        <input
+          type="datetime-local"
+          id="endsAt"
+          name="endsAt"
+          required
+          class="border rounded px-3 py-2 mt-1"
+        >
       </label>
 
-      <label class="flex flex-col">
+      <label for="mediaUrl" class="flex flex-col">
         Image URL
         <input
           type="url"
+          id="mediaUrl"
           name="mediaUrl"
           placeholder="https://example.com/image.jpg"
           class="border rounded px-3 py-2 mt-1"

@@ -14,12 +14,19 @@
     <header id="siteHeader"></header>
 
     <main class="flex-grow px-6 pb-20 mx-auto w-full max-w-[1400px]">
+
+      <!-- Required WCAG H1 -->
+      <h1 class="sr-only">BidHub Auction Listings</h1>
+
       <div class="mx-auto w-full md:w-[90%] lg:w-[85%] mt-10">
+
         <h2 class="text-xl md:text-2xl font-bold mb-8 text-center lg:text-left">
           All Listings
         </h2>
 
+        <!-- Search field with proper label -->
         <div class="mb-6">
+          <label for="searchInput" class="sr-only">Search Listings</label>
           <input
             id="searchInput"
             type="text"
@@ -28,15 +35,19 @@
           >
         </div>
 
+        <!-- Filter select with proper label -->
         <div class="mb-10 flex items-center gap-4">
-          <select
-            id="filterSelect"
-            class="border px-4 py-3 rounded text-base w-56 shadow-sm"
-          >
-            <option value="all">All Listings</option>
-            <option value="active">Active Listings</option>
-            <option value="ended">Ended Listings</option>
-          </select>
+          <div>
+            <label for="filterSelect" class="sr-only">Filter Listings</label>
+            <select
+              id="filterSelect"
+              class="border px-4 py-3 rounded text-base w-56 shadow-sm"
+            >
+              <option value="all">All Listings</option>
+              <option value="active">Active Listings</option>
+              <option value="ended">Ended Listings</option>
+            </select>
+          </div>
 
           <button
             id="createBtn"
@@ -50,6 +61,7 @@
           id="listingsContainer"
           class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full"
         ></div>
+
       </div>
     </main>
 

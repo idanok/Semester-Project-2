@@ -35,9 +35,10 @@
       <h2 class="text-xl md:text-2xl font-bold mb-6 text-center lg:text-left">All Listings</h2>
 
       <div class="w-full mb-6">
+        <label for="searchInput" class="sr-only">Search Listings</label>
         <input id="searchInput" type="text" placeholder="Search listings..." class="border rounded px-3 py-2 w-full" />
       </div>
-
+      
       <div class="w-full mb-6">
         <label for="filterSelect" class="sr-only">Filter Listings</label>
         <select id="filterSelect" class="border rounded px-3 py-2 w-full">
@@ -45,7 +46,7 @@
           <option value="active">Active Listings</option>
           <option value="ended">Ended Listings</option>
         </select>
-      </div>
+      </div>      
 
       <div id="listingsContainer" class="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 p-4"></div>
     </main>
