@@ -7,6 +7,8 @@ const filterSelect = document.getElementById("filterSelect");
 
 let listings = [];
 
+const MAX_LISTINGS = 12;
+
 /**
  * Redirect to login page.
  *
@@ -22,40 +24,41 @@ loginBtn.onclick = () => (window.location.href = "../pages/login.html");
 registerBtn.onclick = () => (window.location.href = "../pages/register.html");
 
 /**
+ * Optimize image by converting to 300px width thumbnail.
+ *
+ * @param {string} url
+ * @returns {string}
+ */
+function optimizeImage(url) {
+  if (!url) return "../assets/images/fallback.webp";
+  return url.replace("https://cdn.noroff.dev/images", "https://cdn.noroff.dev/300/images");
+}
+
+/**
  * Validate an image URL.  
- * If a WebP version exists, use it. Otherwise fallback to original or fallback.svg.
+ * If optimized version fails, fallback to original or fallback.
  *
  * @async
  * @function validateImage
  * @param {string} url - Image URL to validate
- * @returns {Promise<string>} Valid URL or fallback
+ * @returns {Promise<string>}
  */
 function validateImage(url) {
   return new Promise((resolve) => {
     if (!url) return resolve("../assets/images/fallback.webp");
 
-    // Try a WebP version first
-    const webpUrl = url.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+    const thumb = optimizeImage(url);
 
     const img = new Image();
-    img.onload = () => resolve(webpUrl);
-    img.onerror = () => {
-      const fallbackImg = new Image();
-      fallbackImg.onload = () => resolve(url);
-      fallbackImg.onerror = () => resolve("../assets/images/fallback.webp");
-      fallbackImg.src = url;
-    };
+    img.onload = () => resolve(thumb);
+    img.onerror = () => resolve("../assets/images/fallback.webp");
 
-    img.src = webpUrl;
+    img.src = thumb;
   });
 }
 
 /**
- * Fetch all listings from the API and attach a validated image URL.
- *
- * @async
- * @function fetchListings
- * @returns {Promise<void>}
+ * Fetch limited listings & optimize images.
  */
 async function fetchListings() {
   try {
@@ -67,18 +70,19 @@ async function fetchListings() {
 
     const data = await res.json();
 
+    const limitedData = data.data.slice(0, MAX_LISTINGS);
+
     listings = await Promise.all(
-      data.data.map(async (listing) => ({
+      limitedData.map(async (listing) => ({
         ...listing,
         mediaUrl: await validateImage(listing.media?.[0]?.url),
-        altText:
-          listing.media?.[0]?.alt ||
-          listing.title ||
-          "Auction listing image"
+        altText: listing.media?.[0]?.alt || listing.title || "Auction listing image"
       }))
     );
 
+    preloadFirstImage(listings[0]?.mediaUrl);
     renderListings(listings);
+
   } catch (err) {
     console.error("Failed to load listings", err);
     listingsContainer.innerHTML =
@@ -87,20 +91,31 @@ async function fetchListings() {
 }
 
 /**
- * Render listing cards into the page.
+ * Preload the first LCP image.
  *
- * @function renderListings
- * @param {Array<Object>} listingsToRender - Array of listing objects to display
+ * @param {string} url
+ */
+function preloadFirstImage(url) {
+  if (!url) return;
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "image";
+  link.href = url;
+  link.fetchPriority = "high";
+  document.head.appendChild(link);
+}
+
+/**
+ * Render listing cards into the page.
  */
 function renderListings(listingsToRender) {
   listingsContainer.innerHTML = listingsToRender
-    .map((listing) => {
+    .map((listing, index) => {
+      const eager = index === 0 ? "loading='eager' fetchpriority='high'" : "loading='lazy'";
+
       const highestBid = listing.bids?.length
         ? Math.max(...listing.bids.map((b) => b.amount))
         : listing.price || 0;
-
-      const sellerName = listing.seller?.name || "Unknown";
-      const description = listing.description || "No description available";
 
       return `
         <div class="listing-card bg-white rounded-lg shadow p-4 flex flex-col 
@@ -110,22 +125,18 @@ function renderListings(listingsToRender) {
           <div class="h-48 w-full overflow-hidden rounded mb-4 bg-gray-200">
             <img 
               src="${listing.mediaUrl}"
-              srcset="${listing.mediaUrl} 400w, ${listing.mediaUrl} 800w"
+              ${eager}
+              srcset="${listing.mediaUrl} 300w, ${listing.mediaUrl} 600w"
               sizes="(max-width: 600px) 100vw, 300px"
               alt="${listing.altText}"
-              loading="lazy"
               class="w-full h-full object-cover"
             />
           </div>
 
           <h3 class="text-lg font-bold text-center mb-1">${listing.title}</h3>
-
-          <p class="text-sm text-gray-500 text-center mb-1">Posted by: ${sellerName}</p>
-
-          <p class="text-sm mb-2">${description}</p>
-
+          <p class="text-sm text-gray-500 text-center mb-1">Posted by: ${listing.seller?.name || "Unknown"}</p>
+          <p class="text-sm mb-2">${listing.description || "No description available"}</p>
           <p class="text-sm mb-1">Ends: ${new Date(listing.endsAt).toLocaleString()}</p>
-
           <p class="font-semibold">Highest Bid: ${highestBid} credits</p>
         </div>
       `;
@@ -137,13 +148,10 @@ function renderListings(listingsToRender) {
 
 /**
  * Add click handlers so each listing card opens the view page.
- *
- * @function attachCardClickEvents
  */
 function attachCardClickEvents() {
   document.querySelectorAll(".listing-card").forEach((card) => {
     const id = card.dataset.id;
-
     card.addEventListener("click", () => {
       window.location.href = `../pages/view.html?id=${id}`;
     });
@@ -152,8 +160,6 @@ function attachCardClickEvents() {
 
 /**
  * Apply both search and filter based on input text and filter dropdown.
- *
- * @function applySearchAndFilter
  */
 function applySearchAndFilter() {
   const term = searchInput.value.toLowerCase();
@@ -175,13 +181,7 @@ function applySearchAndFilter() {
   renderListings(filtered);
 }
 
-// Filter listeners
 searchInput.addEventListener("input", applySearchAndFilter);
 filterSelect.addEventListener("change", applySearchAndFilter);
 
-/**
- * Initialize the page by fetching listings.
- *
- * @function
- */
 fetchListings();
